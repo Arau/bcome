@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+
+# (C) Guillaume Roderick (webzakimbo)
+# MIT licence.
+
+require 'fileutils'
+bcome_resource_dir = "bcome"
+
+config_dir = "#{bcome_resource_dir}/config"
+filters_dir = "#{bcome_resource_dir}/filters"
+patches_dir = "#{bcome_resource_dir}/patches"
+static_instances_dir = "#{config_dir}/static_instances"
+
+## INSTALL APPLICATION DIRECTORIES
+directories = [
+  filters_dir,
+  patches_dir,
+  static_instances_dir
+]
+
+directories.each do | directory |
+  FileUtils::mkdir_p(directory)
+end
+
+gem_install_path = File.dirname(__FILE__)
+conf_example_path = "#{gem_install_path}/../documentation/examples"
+application_path = Dir.pwd
+
+["platform.yml-example","network.yml-example"].each do |example_conf|
+  transfer_cmd = "rsync -aq #{conf_example_path}/#{example_conf} #{application_path}/#{config_dir}/#{example_conf}"
+  system(transfer_cmd)
+end
+
+## Copy our patches over
+patches_cp_cmd = "cp #{gem_install_path}/../patches/irb.rb #{application_path}/bcome/patches/"
+system(patches_cp_cmd)
+
+## And copy our filters
+filters_cp_cmd = "rsync -aq #{gem_install_path}/../filters/ec2_filter.rb #{application_path}/bcome/filters/"
+system(filters_cp_cmd)
+
+
+exit 0

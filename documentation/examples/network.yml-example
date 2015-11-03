@@ -1,0 +1,57 @@
+---
+### Network examples
+
+# * Only AWS is supported so far for dynamic network environments, and it is expected that you have a .fog credentials file in your home directory
+# * For SSH access, it is assumed that you are using SSH keys. 
+# * For Jump SSH access, it is assumed that you are using your local user for SSH
+
+
+###  Example 1: Dynamic network lookup with jump host
+- :network: "project_foo"
+  :environment: "production"     # This is the 'production' environment
+  :ssh_mode:
+    :type: "jump"      # We SSH to it via an SSH Jump box
+    :jump_host_identifier: "decondevbastionserver"   # The jump box is reference in EC2 by this name
+  :network_lookup:
+    :type: "dynamic"       # We're going to go to EC2 to figure out what machines we have
+    :ec2_tag_filter:
+      :stage: "fooproduction"  # A list of filters to select the machines for this environment within EC2
+    :credentials_key: "usernamefoo"  # Your EC2 credentials key reference from your .fog file
+    :aws_region: "eu-west-1a"          # Provisioning zones & region for your machines
+    :provisioning_region: "eu-west-1"
+    :ec2_server_lookup_filters:
+      "instance-state-name": "running"    # We want to futher select only the running instances
+
+### Example 2:  Static network lookup with jump host
+- :network: "project_foo" 
+  :environment: "static"
+  :ssh_mode:
+    :type: "jump"
+    :jump_host_ip_address: "**.**.**.**.***" # Hardcode the IP address for your SSH entry point
+  :network_lookup:
+    :type: "static"
+
+### Example 3: Dyanmic network lookup, without an SSH jump host
+- :network: "projectbar"
+  :environment: "production"
+  :ssh_mode:
+    :type: "direct"
+    :ssh_user: "ubuntu"  # Your SSH user
+  :network_lookup:
+    :type: "dynamic"
+    :custom_post_process_filter_method: "by_group_on_environment"  # A custom filter method in filters/ec2_filter.rb to further filter your machines
+    :credentials_key: "usernamebar"
+    :aws_region: "us-east-1d"
+    :provisioning_region: "us-east-1"
+    :ec2_server_lookup_filters:
+      "instance-state-name": "running"
+
+### Example 4: Static network lookup, direct SSH - no jump host.
+- :network: "projectfoo"
+  :environment: "development"
+  :ssh_mode:
+    :type: "direct" 
+    :ssh_user: "ubuntu"
+  :network_lookup:
+    :type: "static"
+

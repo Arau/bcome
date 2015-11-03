@@ -1,0 +1,99 @@
+#!/usr/bin/env ruby
+
+# (C) Guillaume Roderick (webzakimbo)
+# MIT licence.
+
+require 'bcome'
+Dir[Dir.pwd  + "/bcome/patches/**/*.rb"].each {|file| load file }
+
+VERBOSE = true  
+START_PROMPT = "bcome"
+
+# The ssh_mode identifier in platforms.yml signifying that this platform is to be accessed via an SSH bastion machine
+SSH_JUMP_MODE_IDENTIFIER = "jump"
+
+# The ssh mode identifier in platforms.yml signifying that this platform is to be accessed directly
+SSH_DIRECT_MODE_IDENTIFIER = "direct"
+
+# The SSH role in instances.yml signifying that an instance is an SSJ jump host
+SSH_JUMP_HOST_ROLE_IDENTIFIER = "sshjumphost"
+
+## The base resource classes - may be overriden
+PLATFORM_STACK_KLASS = ::Bcome::Stack::Platform
+ENV_STACK_KLASS = ::Bcome::Stack::Environment
+INSTANCE_STACK_KLASS = ::Bcome::Stack::Instance
+
+##################
+## DEPENDENCIES ##
+##################
+
+## Filters are loaded lower down as modules, and hence need to be include first
+Dir[Dir.pwd  + "/bcome/filters/**/*.rb"].each {|file| load file }
+
+quick_contexts = []
+
+BECOME = ::Bcome::WorkspaceContext.new 
+BOOT = ::Bcome::Boot.new
+RENDER = ::Bcome::RenderIrb.new
+
+###########################
+## MANAGE QUICK CONTEXTS  #
+###########################
+if ARGV[0] 
+  quick_context = ARGV[0]  
+  quick_context =~ /(.+):(.+)/
+  platform_key = $1
+  context_reference = $2
+
+  unless platform_key && context_reference 
+    puts "Quick context is missing platform key or the context reference".failure
+    exit 1
+  end
+
+  unless platform = BOOT.resource_for_identifier(platform_key)
+    puts "Cannot find platform named #{platform_key}".failure
+    exit
+  end
+
+  unless platform.has_quick_contexts? && (context = platform.quick_context_for_reference(context_reference))
+    puts "No quick context found on platform #{platform_key} for reference #{context_reference}".failure
+    exit
+  end
+
+  quick_contexts = context[:keys]
+end
+
+####################
+## BASIC IRB SETUP #
+####################
+IRB.setup nil
+IRB.conf[:MAIN_CONTEXT] = IRB::Irb.new.context
+
+#########################
+## QUICK CONTEXT & BOOT #
+#########################
+
+context_object = BOOT
+
+if quick_contexts.any?
+  spawn = false
+  quick_contexts.each do |resource_context_key|
+    next_context_resource = context_object.resource_for_identifier(resource_context_key)
+
+    if next_context_resource.nil?
+      puts "Cannot find any resources object named: #{resource_context_key}. Please check your quick contexts and try again".failure
+      exit
+    end
+
+    BECOME.set(next_context_resource, context_object, spawn)
+    context_object = next_context_resource
+  end
+end
+
+##################
+## INIT SESSION ##
+##################
+
+require 'irb/ext/multi-irb'
+IRB.parse_opts_with_ignoring_script
+IRB.irb nil, context_object

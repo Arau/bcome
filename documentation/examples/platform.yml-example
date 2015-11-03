@@ -1,0 +1,18 @@
+---
+## Example platforms list. 
+# Platform have environments
+# environments have servers
+- :name: "project_foo"
+  :description: "All the Foo environments"
+- :name: "project_bar"
+  :description: "All the Bar environments"
+  :quick_contexts:
+
+                   # Quick link example > bcome project_bar:app1
+  - :ref: "app1"   # Provides a quick link to a server named 'app1' within Platform 'project_foo', and environment 'production'
+    :keys:
+    - "project_foo"
+    - "production"
+    - "app1"
+
+
