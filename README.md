@@ -37,36 +37,36 @@ With great power etc - it is assumed that users have been given the correct priv
 
 	### Enter bcome and list resources
 
-![Enter bcome and list resources](https://s3-eu-west-1.amazonaws.com/bcomegemreadmeassets/initial_list.png)
+![Enter bcome and list resources](https://s3-eu-west-1.amazonaws.com/becomegemreadmeassets/initial_list.png)
 
 ### List all servers within the selected platform and environment
 
-![Server list](https://s3-eu-west-1.amazonaws.com/bcomegemreadmeassets/list_servers.png)
+![Server list](https://s3-eu-west-1.amazonaws.com/becomegemreadmeassets/list_servers.png)
 
 ### Select machines to work directly on
 
-![Machine selection](https://s3-eu-west-1.amazonaws.com/bcomegemreadmeassets/add_machines.png)
+![Machine selection](https://s3-eu-west-1.amazonaws.com/becomegemreadmeassets/add_machines.png)
 
 ### Run commands on selected machines
 
-![Run commands](https://s3-eu-west-1.amazonaws.com/bcomegemreadmeassets/run_commands.png)
+![Run commands](https://s3-eu-west-1.amazonaws.com/becomegemreadmeassets/run_commands.png)
 
 ### Run multiple commands on selected machines
 
-![Run multiple commands](https://s3-eu-west-1.amazonaws.com/bcomegemreadmeassets/run_multiple_commands.png)
+![Run multiple commands](https://s3-eu-west-1.amazonaws.com/becomegemreadmeassets/run_multiple_commands.png)
 
 ### SCP Files
 
-![SCP Files](https://s3-eu-west-1.amazonaws.com/bcomegemreadmeassets/scp_files.png)
+![SCP Files](https://s3-eu-west-1.amazonaws.com/becomegemreadmeassets/scp_files.png)
 
 ### SSH to a machine
 
-![SSH to a machine](https://s3-eu-west-1.amazonaws.com/bcomegemreadmeassets/ssh_to_box.png)
+![SSH to a machine](https://s3-eu-west-1.amazonaws.com/becomegemreadmeassets/ssh_to_box.png)
 
 
 ### Use quick links (jump straight to a context)
 
-![Quick context](https://s3-eu-west-1.amazonaws.com/bcomegemreadmeassets/quick_links.png)
+![Quick context](https://s3-eu-west-1.amazonaws.com/becomegemreadmeassets/quick_links.png)
 
 
 
