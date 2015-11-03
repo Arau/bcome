@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/webzakimbo/bcome"
   spec.license       = "MIT"
 
-  spec.files         =  Dir.glob("{bin,lib}/**/*")  #`git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) } #Dir.glob("{bin,lib}/**/*")
+  spec.files         =  Dir.glob("{bin,lib,filters,documentation,patches}/**/*")  #`git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) } #Dir.glob("{bin,lib}/**/*")
   spec.bindir        = "bin"
   spec.executables = ["bcome", "bcome-setup"]
   spec.require_paths = ["lib", "lib/stack", "documentation", "filters", "patches"]
