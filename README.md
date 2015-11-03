@@ -35,7 +35,7 @@ With great power etc - it is assumed that users have been given the correct priv
 
 ## Rapid overview
 
-	### Enter bcome and list resources
+### Enter bcome and list resources
 
 ![Enter bcome and list resources](https://s3-eu-west-1.amazonaws.com/becomegemreadmeassets/initial_list.png)
 
