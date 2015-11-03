@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["guillaume@webzakimbo.com"]
 
   spec.summary       = %q{Toolkit for managing servers & organising the management of servers}
-  spec.description   = %q{Provides a console interface for traversing a hierarchy of platforms -> environment -> servers, and exposes common administration tools for the managemenent either of individual servers, or groups or servers. System is driven from simple configuration, and is extensible. Integrates with AWS EC2 for dynamic network discover.}
+  spec.description   = %q{Provides a console interface for traversing a hierarchy of platforms -> environment -> servers, and exposes common administration tools for the managemenent either of individual servers, or groups or servers. System is driven from simple configuration, and is extensible. Integrates with AWS EC2 for dynamic network discovery.}
   spec.homepage      = "https://github.com/webzakimbo/bcome"
   spec.license       = "MIT"
 
