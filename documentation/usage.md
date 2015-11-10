@@ -16,7 +16,7 @@ or, if with bundler
   > bundle exec bcome
 ```
 
-### Entering the shell and jumping to a quick link contexct
+### Entering the shell and jumping to a quick link context
 
 ```
   > cd /your/installed/bcome/application/directory
