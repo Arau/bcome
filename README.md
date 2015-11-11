@@ -9,7 +9,9 @@ It aims to simplify your day to day server management tasks by enabling access t
 
 * Execute commands across platforms on multiple machines simultaneously, harnessing the power of Ruby to assist with real-time orchestration.
 
-* Simple configuration enables static or dynamic network discovery, exposing SCP, Rsync, and SSH, and direct command execution.  More commands and features to come.
+* Simple configuration enables static or dynamic network discovery.
+
+* Upload & download files (as local or sudo user), and execute commands directly on remote hosts (on either individual, or groups of hosts simultaneously)
 
 * Fully customisable for extending the framework with custom commands & tasks.
 
@@ -35,7 +37,7 @@ With great power etc - it is assumed that users have been given the correct priv
 
 ## Rapid overview
 
-### Enter bcome and list resources
+	### Enter bcome and list resources
 
 ![Enter bcome and list resources](https://s3-eu-west-1.amazonaws.com/becomegemreadmeassets/initial_list.png)
 
@@ -55,14 +57,9 @@ With great power etc - it is assumed that users have been given the correct priv
 
 ![Run multiple commands](https://s3-eu-west-1.amazonaws.com/becomegemreadmeassets/run_multiple_commands.png)
 
-### SCP Files
-
-![SCP Files](https://s3-eu-west-1.amazonaws.com/becomegemreadmeassets/scp_files.png)
-
 ### SSH to a machine
 
 ![SSH to a machine](https://s3-eu-west-1.amazonaws.com/becomegemreadmeassets/ssh_to_box.png)
-
 
 ### Use quick links (jump straight to a context)
 

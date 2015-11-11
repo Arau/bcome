@@ -22,4 +22,12 @@ class ::Bcome::Boot
     ::START_PROMPT
   end
 
+  def namespace
+    starting_namespace
+  end
+
+  def starting_namespace
+    ""  # Used to determine where to store downloaded file - this is the start point directory, relative to the bcome install directory
+  end
+
 end

@@ -1,7 +1,7 @@
 module ::Bcome::CommandHelper
 
-  def run_local(command)
-    puts "(local) > #{command}" if ::VERBOSE
+  def run_local(command, silent = false)
+    puts "(local) > #{command}" if !silent && ::VERBOSE
     system(command)
   end
   alias :local :run_local

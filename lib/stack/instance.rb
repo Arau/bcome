@@ -40,15 +40,28 @@ module ::Bcome::Stack
 
     def menu_items
       super + [
-        { :command => "rsync", :description => "Rsync files.", :usage => "rsync 'localpath', 'remotepath'" },
         { :command => "run", :description => "Execute a command.", :usage => "run 'command'" },
-        { :command => "scp", :description => "SCP files.", :usage => "scp ['array','of', 'file', 'paths'], 'remote_path'" },
-        { :command => "ssh", :description => "Initiate an SSH connection." }
+        { :command => "put", :description => "Copy files to remote (recursive - uses rsync)", :usage => "put 'local_path', 'remote_path'" },
+        { :command => "get", :description => "Download from remote (recursive - uses rsync).", :usage => "get 'remote_path'"},
+        { :command => "ssh", :description => "Initiate an SSH connection." },
+        { :command => "sudo", :description => "Run 'get' and 'put' in sudo mode (assumes you have passwordless sudo setup)" }
       ]
     end
 
     def platform
       @environment.platform
+    end
+
+    def sudo 
+      toggle_sudo
+    end
+
+    def namespace
+      "#{@environment.namespace}/#{identifier}"
+    end
+
+    def is_sudo?
+      super || @environment.is_sudo?
     end
 
     def responds_to_list?
@@ -80,7 +93,7 @@ module ::Bcome::Stack
     end
 
     def do_describe
-      description = "#{identifier}"
+      description = "#{identifier}#{ is_sudo? ? " MODE: sudo "  : "" }"
       description += "\n\t* Internal IP #{@meta_data[:external_network_interface_address]}"
       description += "\n\t* External IP #{public_ip_address}" if public_ip_address
       description += "\n\t* #{role}" if role 

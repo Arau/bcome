@@ -31,9 +31,10 @@ module ::Bcome::Stack
         { :command => "remove", :description => "Remove a resource you no longer with to work on.", :usage => "remove 'identifier', OR remove ['array', 'of','identifiers']" },
         { :command => "clear!", :description => "Remove all selected resources." },
         { :command => "selections", :description => "Show all added resources." },
-        { :command => "rsync", :description => "Rsync files to all selected resources.", :usage => "rsync 'localpath', 'remotepath'" },
         { :command => "run", :description => "Execute a command on all selected resources", :usage => "run 'command'" },
-        { :command => "scp", :description => "SCP files up to all selected resources", :usage => "scp ['array','of', 'file', 'paths'], 'remote_path'" },
+        { :command => "get", :description => "Download from remote from all selected resources (recursive - uses rsync)", :usage => "get 'remote_path'" },
+        { :command => "put", :description => "Copy files up to all selected resources (recursive - uses rsync)", :usage => "put 'local_path', 'remote_path'" },
+        { :command => "sudo", :description => "Run 'get' and 'put' in sudo mode (assumes you have passwordless sudo setup)" }
       ]
     end
   
@@ -50,6 +51,10 @@ module ::Bcome::Stack
     def ssh_mode_user
       return @meta_data[:ssh_mode][:ssh_user]
     end 
+
+    def sudo 
+      toggle_sudo
+    end
 
     def valid_ssh_modes
       [::SSH_JUMP_MODE_IDENTIFIER, ::SSH_DIRECT_MODE_IDENTIFIER]

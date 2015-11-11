@@ -14,7 +14,21 @@ class Object
   def become(object)
     BECOME.set(object, self)
   end
-  
+ 
+  def toggle_sudo
+    @sudo = @sudo.nil? ? true : (@sudo ? false : true)
+    puts "sudo #{sudo_state.informational}"
+    return
+  end
+
+  def is_sudo?
+    @sudo
+  end
+ 
+  def sudo_state
+    is_sudo? ? "on" : "off"
+  end
+
   def workon(identifier)
     resource = resource_for_identifier(identifier)
 
@@ -32,7 +46,7 @@ class Object
       { :command => "list / ls", :description => "List all available resources at the current context." },
       { :command => "describe", :description => "Describe the resource object at the current context." },
       { :command => "workon' / w", :description => "Select a resource object, and switch to its context.", :usage => "workon 'identifier'" },
-      { :command => "exit", :description => "Close the current context" },
+      { :command => "exit", :description => "Return to the previous context" }, 
       { :command => "exit!", :description => "Close all contexts, and exit Become."},
       { :command => "local", :description => "Execute a shell command on your local machine.", :usage => 'local "command"'}
     ]
@@ -62,7 +76,7 @@ class Object
   def set_irb_prompt(conf)
     conf[:PROMPT][:CUSTOM] = {
       :PROMPT_N => "\e[1m:\e[m ",
-      :PROMPT_I => "\e[1m#{BECOME.irb_prompt} >\e[m ",
+      :PROMPT_I => "\e[1m#{BECOME.irb_prompt} #{is_sudo? ? " sudo ".danger : ""}>\e[m ", # high voltage
       :PROMPT_C => "\e[1m#{BECOME.irb_prompt} >\e[m ",
       :RETURN => ::VERBOSE ? "%s \n" : "\n"
     }

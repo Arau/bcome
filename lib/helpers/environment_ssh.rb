@@ -31,8 +31,8 @@ module ::Bcome::EnvironmentSSH
 
   def execute_scp_upload(files, remote_path, node)
     begin
-      scp = ::Bcome::Scp.new(files, remote_path, proxy, node)
-      scp.upload!
+      scp = ::Bcome::Scp.new(proxy, node)
+      scp.upload!(files, remote_path)
     rescue Net::SSH::AuthenticationFailed
       raise "Could not authenticate connection to #{node.identifier}".failure
     rescue Net::SSH::Disconnect 
@@ -40,5 +40,15 @@ module ::Bcome::EnvironmentSSH
     end
   end        
 
+  def execute_scp_download(remote_path, local_path, node)
+    begin
+      scp = ::Bcome::Scp.new(proxy, node)
+      scp.download!(remote_path, local_path)
+    rescue Net::SSH::AuthenticationFailed
+      raise "Could not authenticate connection to #{node.identifier}".failure
+    rescue Net::SSH::Disconnect
+      raise "SSH connection to #{node.identifier} was disconnected".failure
+    end
+  end   
 
 end

@@ -12,6 +12,15 @@ module ::Bcome::BecomeObject
     "#{previous_workspace_object.send(:become_identifier)}> #{identifier}"
   end
 
+
+  def local_download_path
+    "#{Dir.pwd}/downloads#{namespace}" 
+  end
+
+  def namespace
+    "#{previous_workspace_object.send(:namespace)}/#{identifier}"
+  end
+
   def previous_workspace_object=(object)
     @previous_workspace_object = object
   end

@@ -22,29 +22,28 @@ module ::Bcome::Selections
     return
   end
 
-  def rsync(local_path, remote_path)
+  def put(local_path, remote_path)
     if !@objects || @objects.empty?
       no_selections_error
       return  
     end
+
     @objects.each do |object|
-      object.rsync(local_path, remote_path)
+      object.put(local_path, remote_path)
     end
     return
   end
 
-  def scp(files, remote_path)
+  def get(remote_path)
     if !@objects || @objects.empty?
       no_selections_error
       return
     end
-
-    return unless @objects
     @objects.each do |object|
-      object.scp(files, remote_path)
-    end 
+      object.get(remote_path)
+    end
     return
-  end  
+  end
 
   def add(resource_identifier = nil)
     if resource_identifier.is_a?(Array)

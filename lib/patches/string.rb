@@ -16,6 +16,10 @@ class String
     self.friendly
   end
 
+  def danger
+    self.colorize(:white).on_red
+  end
+
   def friendly
     self.colorize(:black).on_green
   end 

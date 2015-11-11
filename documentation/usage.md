@@ -119,17 +119,21 @@ e.g. remove 'identifier', OR remove ['array', 'of','identifiers']
 > selections
 - Show all added resources.
 
-> rsync
-- Rsync files to all selected resources.
-e.g. rsync 'localpath', 'remotepath'
+> put
+- Uploads files to all selected resources. Uses Rsync, and so copies recursively
+e.g. put 'localpath', 'remotepath'
+
+> get
+- Downloads files from all remote resources down to local. Does so using Rsync, and so is recursive.
+- A 'downloads' directory will be created in your project directory, within which downloaded files are stored.
+e.g. get 'remotepath'
 
 > run
 - Execute a command on all selected resources
 e.g. run 'command'
 
-> scp
-- SCP files up to all selected resources
-e.g. scp ['array','of', 'file', 'paths'], 'remote_path'
+> sudo
+- Enters 'sudo' mode, resulting in 'get' or 'put' commands being execute remotely using 'sudo'. This assumes that you have passwordless sudo setup on each respective remote host.
 
 ### Instance level commands
 
@@ -156,26 +160,22 @@ e.g. workon 'identifier'
 - Execute a shell command on your local machine.
 e.g. local "command"
 
-> rsync
-- Rsync files.
-e.g. rsync 'localpath', 'remotepath'
+> put
+- Uploads files. Uses Rsync, and so copies recursively
+e.g. put 'localpath', 'remotepath'
+
+> get
+- Downloads files to local. Does so using Rsync, and so is recursive.
+- A 'downloads' directory will be created in your project directory, within which downloaded files are stored.
+e.g. get 'remotepath'
 
 > run
 - Execute a command.
 e.g. run 'command'
 
-> scp
-- SCP files.
-e.g. scp ['array','of', 'file', 'paths'], 'remote_path'
+> sudo
+- Enters 'sudo' mode, resulting in 'get' or 'put' commands being execute remotely using 'sudo'. This assumes that you have passwordless sudo setup on the remote host.
 
 > ssh
 - Initiate an SSH connection.
-
-
-
-
-
-
-
-
 
