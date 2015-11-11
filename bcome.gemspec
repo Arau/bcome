@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
   spec.files         =  Dir.glob("{bin,lib,filters,documentation,patches}/**/*") 
   spec.bindir        = "bin"
   spec.executables = ["bcome", "bcome-setup"]
-  spec.require_paths = ["lib", "lib/stack",  "documentation", "filters", "patches"]
+  spec.require_paths = ["lib", "lib/stack"]
   spec.add_dependency 'aws-sdk', '~> 2'
   spec.add_dependency 'colorize', '0.7.7'
   spec.add_dependency 'net-scp', '~> 1.2', '>= 1.2.1'
